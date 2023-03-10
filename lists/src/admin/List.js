@@ -14,9 +14,9 @@ class List extends Component {
       return (
         <div id={name} key={uuidv4()}>
           <div id="listDiv">
-            <h3>{name} List</h3>
+            <h3>{name}</h3>
           </div>
-          <ul>
+          <ul class="listUL">
             {items.map(function (item) {
               return (
                 <li key={uuidv4()}><ListItem item={item} key={uuidv4()} /></li>

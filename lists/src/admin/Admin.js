@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Lists from './Lists.js';
 import AddList from './AddList.js';
-import './Admin.css';
+import '../app.css';
 
 class Admin extends Component {
 
@@ -36,6 +36,21 @@ class Admin extends Component {
   handleAddItem(s) {
     // Implement this function!
     this.setState({ items: { ...this.state.items, [s.listName]: this.state.items[s.listName].concat(s.newItem) } });
+  }
+
+
+  /**
+   * This function is called when this component is first rendered.
+   * It fetches the data from the server and then updates the state
+   * of this component with the data.
+   * Insparation from https://reactjs.org/docs/faq-ajax.html
+   */
+  componentDidMount() {
+    fetch('/adminData')
+      .then(response => response.json())
+      .then(listsData => {
+        this.setState({ lists: listsData.lists, items: listsData.items });
+      })
   }
 
   /**

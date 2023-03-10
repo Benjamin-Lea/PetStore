@@ -15,3 +15,5 @@ node server.js'
 ' cd <desired app (list)> 
 npm run build
 '
+## probably need to run this
+'npm install react-router-dom --save'

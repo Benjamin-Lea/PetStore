@@ -1,28 +1,45 @@
-import React, { Component } from 'react';
+// Information from https://reactrouter.com/en/main/start/examples
+import * as React from "react";
+import {Routes, Route, Outlet, Link } from "react-router-dom";
 import Admin from './admin/Admin.js';
 
-class App extends Component {
-    constructor() {
-        super();
-    }
-
-    goAdmin(e) {
-        window.location.href = window.location.href + 'admin';
-    }
-
-    /**
-     * Renders the component.
-     */
-    render() {
-        return (
-            <div className="App">
-                <div>
-                    <button onClick={this.goAdmin.bind(this)}>Admin</button>
-                </div>
-            </div>
-        );
-    }
-
+export default function App() {
+  return (
+    <div>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="/admin" element={<Admin />} />
+        </Route>
+      </Routes>
+    </div>
+  );
 }
 
-export default App;
+function Layout() {
+  return (
+    <div>
+      <nav class="navbar navbar-expand navbar-dark bg-dark">
+        <div class="container-fluid">
+          <Link to="/" class="navbar-brand" > Pet Store </Link>
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <Link to="/admin" class="btn btn-secondary">
+                  Login
+                </Link>
+              </li>
+            </ul>
+        </div>
+      </nav>
+      <Outlet />
+    </div>
+    );
+}
+
+function Home() {
+  return (
+    <div>
+      <h2>Home</h2>
+    </div>
+  );
+}

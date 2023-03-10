@@ -17,9 +17,9 @@ h3 {
   color: green;
 }
 
-h5 {
+/* h5 {
   text-align: center;
-}
+} */
 
 #addDog {
   text-align: left;
@@ -31,13 +31,15 @@ dl {
   list-style-type: disc;
 }
 
-ul {
+.listUL {
   list-style-type: none;
   text-align: center;
   background-color: #d4f779;
   border-radius: 5px;
   margin-top: -30px;
   margin-bottom: 0px;
+  margin-right: 0px;
+  padding-left: 0;
 }
 
 #listDiv {
