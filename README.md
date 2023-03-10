@@ -4,7 +4,7 @@ Modern Pet Store Website
 
 ## Setting up the server 
 'cd server
-npm install express --save
+npm install 
 node server.js'
 
 ## Rebuilding the server 

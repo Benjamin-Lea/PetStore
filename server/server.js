@@ -7,7 +7,12 @@ const path = require('path')
 
     app.use(express.static(path.join(__dirname, '..','lists','build')));
 
-    app.get('*', (req, res) => {
+    app.use('/admin', (req, res) => {
+        console.log('admin');
+    });
+
+    app.use('/', (req, res) => {
+        console.log('home');
         res.sendFile(path.join(__dirname, '..','lists','build', 'index.html'))
     });
 
