@@ -44,3 +44,38 @@ db.lists.find().sort({type: -1})
 # TODO
 when add item add the item to the database
 when add list add list to the database
+
+# Key
+bz9JPLHmSFPaG149a5m45f6fQ6zfQG6kwcIWpl0K6I7sXr8Jq3CjPhpAhylci1Cs
+# Example
+var axios = require('axios');
+var data = JSON.stringify({
+    "collection": "lists",
+    "database": "Petstore",
+    "dataSource": "DatabaseOne",
+    "projection": {
+        "_id": 1
+    }
+});
+            
+var config = {
+    method: 'post',
+    url: 'https://us-east-2.aws.data.mongodb-api.com/app/data-olmhn/endpoint/data/v1/action/findOne',
+    headers: {
+      'Content-Type': 'application/json',
+      'Access-Control-Request-Headers': '*',
+      'api-key': 'bz9JPLHmSFPaG149a5m45f6fQ6zfQG6kwcIWpl0K6I7sXr8Jq3CjPhpAhylci1Cs',
+    },
+    data: data
+};
+            
+axios(config)
+    .then(function (response) {
+        console.log(JSON.stringify(response.data));
+    })
+    .catch(function (error) {
+        console.log(error);
+    });
+
+# URL endpoint
+https://us-east-2.aws.data.mongodb-api.com/app/data-olmhn/endpoint/data/v1
