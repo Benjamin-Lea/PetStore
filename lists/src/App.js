@@ -2,6 +2,7 @@
 import * as React from "react";
 import {Routes, Route, Outlet, Link } from "react-router-dom";
 import Admin from './admin/Admin.js';
+import Home from './home/Home.js';
 
 export default function App() {
   return (
@@ -21,12 +22,13 @@ function Layout() {
     <div>
       <nav class="navbar navbar-expand navbar-dark bg-dark">
         <div class="container-fluid">
+          <div>
           <Link to="/" class="navbar-brand" > Pet Store </Link>
+          <Link to="/" class="btn btn-dark"> Home </Link>
+          </div>
             <ul class="navbar-nav">
               <li class="nav-item">
-                <Link to="/admin" class="btn btn-secondary">
-                  Login
-                </Link>
+                <Link to="/admin" class="btn btn-secondary"> Login </Link>
               </li>
             </ul>
         </div>
@@ -34,12 +36,4 @@ function Layout() {
       <Outlet />
     </div>
     );
-}
-
-function Home() {
-  return (
-    <div>
-      <h2>Home</h2>
-    </div>
-  );
 }

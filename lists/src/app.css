@@ -1,3 +1,8 @@
+.slick-prev:before,
+.slick-next:before {
+  color: black!important; 
+}
+
 h1 {
   margin-top: 40px;
 }
@@ -17,9 +22,7 @@ h3 {
   color: green;
 }
 
-/* h5 {
-  text-align: center;
-} */
+
 
 #addDog {
   text-align: left;

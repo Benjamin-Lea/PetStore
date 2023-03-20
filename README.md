@@ -79,3 +79,4 @@ axios(config)
 
 # URL endpoint
 https://us-east-2.aws.data.mongodb-api.com/app/data-olmhn/endpoint/data/v1
+# npm install react-slick --save
