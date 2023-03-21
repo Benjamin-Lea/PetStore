@@ -6,7 +6,8 @@ class AddList extends Component {
     super(props);
     this.state = {
       list: '',
-      items: []
+      items: [],
+      multipleItems: false
     };
   }
 
@@ -16,11 +17,31 @@ class AddList extends Component {
   }
 
   handleSubmit(e) {
-    e.preventDefault(); // this prevents the page from reloading -- do not delete this line!
-    this.setState({ list: this.state.list });
-    this.props.addList(this.state);
-    this.setState({ list: '' })
+    // e.preventDefault(); // this prevents the page from reloading -- do not delete this line!
+    // this.setState({ list: this.state.list });
+    // this.props.addList(this.state);
+    // this.setState({ list: '' })
+    const response = fetch('/addList', {
+      headers: { 'Content-Type': 'application/json' },
+      method: 'POST',
+      body: JSON.stringify(
+        {
+          listName: this.state.list
+        }
+      )
+    });
+    console.log(this.state.list);
+
+    this.setState({
+      list: '',
+      items: [],
+      multipleItems: false
+    });
   }
+
+  handleClick(e) {
+      this.setState({ multipleItems: !this.state.multipleItems });
+    }
 
   render() {
     return (

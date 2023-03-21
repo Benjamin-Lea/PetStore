@@ -19,17 +19,25 @@ class AddItem extends Component {
   }
 
   handleSubmit(e) {
-    const response = fetch('/addItem', {
+    // e.preventDefault(); // this prevents the page from reloading -- do not delete this line!
+    // should be this.props.HandleAddItem
+    // this.props.addItem(this.state.newItem);
+    fetch('/addItem', {
       headers: { 'Content-Type': 'application/json' },
       method: 'POST',
       body: JSON.stringify(
         {
-          listName: 'asdf',
+          listName: this.state.listName,
           itemName: this.state.itemName
         }
       )
     });
-    console.log(this.state.itemName);
+    console.log(this.state.listName + this.state.itemName);
+    this.setState({
+      list: '',
+      items: [],
+      multipleItems: false
+    });
   }
 
 

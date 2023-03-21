@@ -25,7 +25,7 @@ class ListItem extends Component {
 
     return (
       <span onClick={this.handleClick.bind(this)} style={{ color: this.state.color }}>
-        <h5>{name}</h5>
+        <h5>{item}</h5>
       </span>
     );
 

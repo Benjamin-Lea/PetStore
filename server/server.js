@@ -8,15 +8,13 @@ const uri = "mongodb+srv://dbuser:MangoDeezBees@databaseone.ayfgx0w.mongodb.net/
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
 const dbName = "Petstore";
-const collectionName = "lists";
-
 const database = client.db(dbName);
-const collection = database.collection(collectionName);
 
 var mongoose = require('mongoose');
 mongoose.connect(uri);
 
 var Animal = require('./animal.js');
+var Species = require('./species.js');
 
 app.use(express.static(path.join(__dirname, '..', 'lists', 'build')));
 
@@ -24,16 +22,26 @@ app.use(bodyPArser.json());
 
 app.use('/adminData', async (req, res) => {
   try {
-    var cursor = await collection.find({}, { projection: { _id: 0, list: 1, items: 1 } });
-    var index = 0;
-    var ray = await cursor.toArray();
-    var data = { lists: Array(ray.length), items: Object() };
-    ray.forEach(obj => {
-      data.lists[index] = obj.list;
-      data.items[obj.list] = obj.items;
-      index += 1;
-
-    });
+    console.log("In /adminData");
+    // Get the species
+    var species = await database.collection('species').find({}, { projection: { _id: 0, name: 1 } }).toArray();
+    // set our base data object
+    var data = { lists: Array(species.length), items: Object() };
+    for(let index = 0; index < species.length; index++) {
+      // Set the list name
+      data.lists[index] = species[index].name;
+      // Get the items for the list
+      var animals = await database.collection('animals').find({ species: species[index].name }, { projection: { _id: 0, name: 1 } }).toArray();
+      // create an object with all the names
+      var animalNames = Array(animals.length);
+      var animalIndex = 0;
+      animals.forEach(animal => {
+        animalNames[animalIndex] = animal.name;
+        animalIndex = animalIndex + 1;
+      });
+      // set the items for the list
+      data.items[species[index].name] = animalNames;
+    }
   } catch (err) {
     console.log("Sumn is not right");
   }
@@ -41,17 +49,34 @@ app.use('/adminData', async (req, res) => {
 });
 
 app.use('/addItem', async (req, res) => {
-  console.log("In AddItem");
+  console.log("In /AddItem");
   const { listName, itemName } = req.body;
   try {
-    var Pip = new Animal({name: itemName, species: listName});
+    var Pip = new Animal({ name: itemName, species: listName });
     await Pip.save();
   } catch (err) {
     console.log(err);
-    if(err.code === 11000) {
+    if (err.code === 11000) {
       console.log("Duplicate entry");
     }
-    else{
+    else {
+      console.log("Unknown error");
+    }
+  }
+});
+
+app.use('/addList', async (req, res) => {
+  console.log("In AddList");
+  const { listName } = req.body;
+  try {
+    var Pip = new Species({ name: listName });
+    await Pip.save();
+  } catch (err) {
+    console.log(err);
+    if (err.code === 11000) {
+      console.log("Duplicate entry");
+    }
+    else {
       console.log("Unknown error");
     }
   }
