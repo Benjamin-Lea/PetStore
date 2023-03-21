@@ -20,17 +20,33 @@ class ListItem extends Component {
   }
 
   render() {
-    var item = this.props.item;
-    var name = item.name;
+    let name = this.props.name;
+    let breed = this.props.breed;
+    let age = this.props.age;
+    let gender = this.props.gender;
+    let imageURLs = this.props.imageURLs;
+    const imageStyle = {
+      height: "50vh",
+      maxWidth: "75%",
+      margin: "auto",
+  }
 
     return (
       <span onClick={this.handleClick.bind(this)} style={{ color: this.state.color }}>
-        <h5>{item}</h5>
+        <div class="mx-auto">
+          <div class="card">
+            <img src={imageURLs} class="card-img-top" alt="Pet Image" style={imageStyle} />
+            <div class="card-body">
+              <h5 id="card-text">Pet Name: {name}</h5>
+              <p id="card-text">Age: {age}</p>
+              <p id="card-text">Breed: {breed}</p>
+              <p id="card-text">Gender: {gender}</p>
+            </div>
+          </div>
+        </div>
       </span>
     );
-
   }
-
 }
 export default ListItem;
 

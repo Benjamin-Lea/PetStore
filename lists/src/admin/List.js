@@ -9,7 +9,7 @@ class List extends Component {
   render() {
     var name = this.props.name;
     var items = this.props.items;
-
+    
     if (items) {
       return (
         <div id={name} key={uuidv4()}>
@@ -17,9 +17,15 @@ class List extends Component {
             <h3>{name}</h3>
           </div>
           <ul class="listUL">
-            {items.map(function (item) {
+            {items.animalNames.map(function (name, index) {
               return (
-                <li key={uuidv4()}><ListItem item={item} key={uuidv4()} /></li>
+                <li key={uuidv4()}>
+                  <ListItem name={name} 
+                  breed={items.animalBreeds[index]} 
+                  age={items.animalAges[index]} 
+                  gender={items.animalGenders[index]}
+                  imageURLs={items.animalImageURLs[index]} key={uuidv4()} />
+                </li>
               )
             })}
           </ul>

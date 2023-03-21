@@ -7,40 +7,6 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 // Uses https://react-slick.neostack.com/docs/example/simple-slider
-function PrevArrow(props) {
-  const { className, onClick } = props;
-  return (
-    <div
-      className={className}
-      onClick={onClick}
-      style={{
-        zIndex: "1",
-        left: "0px\\",
-        backgroundColor: "transparent",
-        width: "100px",
-      }}
-    >
-    </div>
-  );
-}
-
-function NextArrow(props) {
-  const { className, onClick } = props;
-  return (
-    <div
-      className={className}
-      onClick={onClick}
-      style={{
-        zIndex: "1",
-        backgroundColor: "transparent",
-        width: "100px",
-        marginTop: "px"
-      }}
-    >
-    </div>
-  );
-}
-
 
 class Home extends Component {
   constructor() {

@@ -31,28 +31,40 @@ app.use('/adminData', async (req, res) => {
       // Set the list name
       data.lists[index] = species[index].name;
       // Get the items for the list
-      var animals = await database.collection('animals').find({ species: species[index].name }, { projection: { _id: 0, name: 1 } }).toArray();
-      // create an object with all the names
-      var animalNames = Array(animals.length);
-      var animalIndex = 0;
-      animals.forEach(animal => {
-        animalNames[animalIndex] = animal.name;
-        animalIndex = animalIndex + 1;
-      });
+
+      let animals = await database.collection('animals').find({ species: species[index].name}, { projection: { _id: 0, name: 1 } }).toArray();
+      let breeds = await database.collection('animals').find({ species: species[index].name}, { projection: { _id: 0, breed: 1 } }).toArray();  
+      let ages = await database.collection('animals').find({ species: species[index].name}, { projection: { _id: 0, age: 1 } }).toArray();
+      let genders = await database.collection('animals').find({ species: species[index].name}, { projection: { _id: 0, gender: 1 } }).toArray();
+      let imageURLs = await database.collection('animals').find({ species: species[index].name}, { projection: { _id: 0, imageURL: 1 } }).toArray();
+      let animalAges = Array(animals.length);
+      let animalNames = Array(animals.length);
+      let animalBreeds = Array(animals.length);
+      let animalGenders = Array(animals.length);
+      let animalImageURLs = Array(animals.length);
+      for(let i = 0; i < animals.length; i++) {
+        animalNames[i] = animals[i].name;
+        animalBreeds[i] = breeds[i].breed;
+        animalAges[i] = ages[i].age;
+        animalGenders[i] = genders[i].gender;
+        animalImageURLs[i] = imageURLs[i].imageURL;
+      }
       // set the items for the list
-      data.items[species[index].name] = animalNames;
-    }
+      data.items[species[index].name] = {animalNames, animalBreeds, animalAges, animalGenders, animalImageURLs};
+      // data.items[species[index].name] = {animalNames, animalBreeds};
+    } 
   } catch (err) {
-    console.log("Sumn is not right");
+    console.log("Error occurred loading admin data");
   }
   res.json(data);
 });
 
 app.use('/addItem', async (req, res) => {
   console.log("In /AddItem");
-  const { listName, itemName } = req.body;
+  console.log(req.body);
+  const { listName, itemName, petName, imageURL, breed, age } = req.body;
   try {
-    var Pip = new Animal({ name: itemName, species: listName });
+    var Pip = new Animal({ name: itemName, species: listName, name : petName, breed: breed, imageURL: imageURL, age: age});
     await Pip.save();
   } catch (err) {
     console.log(err);

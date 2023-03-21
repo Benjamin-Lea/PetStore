@@ -10,7 +10,8 @@ var animalSchema = new mongoose.Schema({
     breed: String,
     gender: { type: String, enum: ['male', 'female'] },
     traits: [String],
-    age: Number
+    age: Number,
+    imageURL: String
   });
 
   module.exports = mongoose.model('Animal', animalSchema);

@@ -7,67 +7,69 @@ class AddItem extends Component {
     super();
     this.state = {
       listName: '',
-      itemName: '',
+      petName: '',
+      imageURL: '',
+      breed: '',
+      age: '',
+      gender: 'male',
       newItem: {}
     }
   }
 
-  handleChange(e) {
-    this.setState({ itemName: e.target.value });
+  handleChange(e, property) {
+    this.setState({ [property]: e.target.value });
     this.setState({ listName: this.props.idName });
-    this.setState({ newItem: { 'name': e.target.value } });
+    this.setState({ newItem: { [property]: e.target.value } });
   }
 
   handleSubmit(e) {
-    // e.preventDefault(); // this prevents the page from reloading -- do not delete this line!
-    // should be this.props.HandleAddItem
-    // this.props.addItem(this.state.newItem);
+    e.preventDefault();
     fetch('/addItem', {
       headers: { 'Content-Type': 'application/json' },
       method: 'POST',
       body: JSON.stringify(
         {
           listName: this.state.listName,
-          itemName: this.state.itemName
+          petName: this.state.petName,
+          imageURL: this.state.imageURL,
+          breed: this.state.breed,
+          age: this.state.age,
+          gender: this.state
         }
       )
     });
-    console.log(this.state.listName + this.state.itemName);
+    console.log(this.state.listName + this.state.petName);
     this.setState({
-      list: '',
-      items: [],
-      multipleItems: false
+      petName: '',
+      imageURL: '',
+      breed: '',
+      age: ''
     });
   }
-
 
   render() {
     var divName = 'add' + this.props.idName;
     return (
-      <div className='addItemDiv'>
-        <form ref='form' class="row g-3" onSubmit={this.handleSubmit.bind(this)}>
-          <div id={divName} ref={divName} class="col"> 
-            <input 
-              type='text' 
-              class="form-control form-control-sm" 
-              placeholder="Add new item to list" 
-              ref='id' 
-              value={this.state.itemName} 
-              onChange={this.handleChange.bind(this)} 
-             />
+      <div className="addItemDiv">
+        <form ref="form" className="row g-3" onSubmit={this.handleSubmit.bind(this)}>
+          <div id={divName} ref={divName} className="col">
+            <input type="text" className="form-control form-control-sm" placeholder="Pet Name" ref="petName" value={this.state.petName} onChange={(e) => this.handleChange(e, "petName")} />
+            <input type="text" className="form-control form-control-sm" placeholder="Image URL" ref="imageURL" value={this.state.imageURL} onChange={(e) => this.handleChange(e, "imageURL")} />
+            <input type="text" className="form-control form-control-sm" placeholder="Breed" ref="breed" value={this.state.breed} onChange={(e) => this.handleChange(e, "breed")} />
+            <input type="number" className="form-control form-control-sm" placeholder="Age" ref="age" value={this.state.age} onChange={(e) => this.handleChange(e, "age")} />
+            <p> </p>
+            <input type="radio" name="gender" value="male" checked={this.state.gender === "male"} onChange={(e) => this.handleChange(e, "gender")} />
+            <label for="male">Male</label>
+            <input type="radio" name="gender" value="female" checked={this.state.gender === "female"} onChange={(e) => this.handleChange(e, "gender")} />
+            <label for="female">Female</label>
           </div>
-          <div class="col-auto">
-            <button 
-              class="btn btn btn-secondary btn-sm" 
-              type="submit" 
-              >Add Item
-            </button>
-          </div>
+          <div><button className="btn btn btn-secondary btn-sm" type="submit">Add Pet</button></div>
         </form>
       </div>
     );
   }
 
 }
+
 
 export default AddItem;

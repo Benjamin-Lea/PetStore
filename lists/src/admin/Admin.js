@@ -57,6 +57,7 @@ class Admin extends Component {
    * Renders the component.
    */
   render() {
+    console.log(this.state);
     return (
       <div className="Admin">
         <AddList addList={this.handleAddList.bind(this)} />
