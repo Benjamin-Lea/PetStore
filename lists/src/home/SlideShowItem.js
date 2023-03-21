@@ -19,11 +19,9 @@ class SlideShowItem extends Component {
             maxWidth: "75%",
             margin: "auto",
         }
-        const style = {
-        }
         if (item != null) {
             return(
-                <div style={style}>
+                <div>
                     <h2>{list}</h2>
                     <h3>{item.name}</h3>
                     <img style={imageStyle} src={item.image} alt={item.name} />

@@ -1,21 +1,40 @@
 import React, { Component } from 'react';
 import '../app.css';
 import './Catalog.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import DataTable from 'react-data-table-component';
 
-const dropdownBar = document.getElementsByClassName('dropdownBar');
-const detectionResults = document.getElementsByClassName('Catalog-body');
+const columns = [
+    {
+        name: 'Title',
+        selector: row => row.title,
+    },
+    {
+        name: 'Year',
+        selector: row => row.year,
+    },
+];
 
-function toggleDropdown() {
-    dropdownBar[0].classList.toggle('is-active');
-    detectionResults[0].classList.toggle('is-active');
-};
+const data = [
+    {
+        id: 1,
+        title: 'Beetlejuice',
+        year: '1988',
+    },
+    {
+        id: 2,
+        title: 'Ghostbusters',
+        year: '1984',
+    },
+]
 
 class Catalog extends Component {
     constructor() {
         super();
         this.state = {
             lists: [], // this holds the name of each list
-            items: {} // this property names of this object are the names of the lists; their values are arrays of the items in each list
+            items: {}, // this property names of this object are the names of the lists; their values are arrays of the items in each list
+            filterText: ""
         };
     }
 
@@ -24,127 +43,32 @@ class Catalog extends Component {
             .then(response => response.json())
             .then(listsData => {
                 this.setState({ lists: listsData.lists, items: listsData.items });
-            })
+            });
+    }
+
+    updateFilter(event) {
+        this.setState({ filterText: event.target.value });
     }
 
     render() {
         return (
             <div className='Catalog'>
-                <div className='Catalog-header'>Head</div>
-
-                <div class="dropdownBar" onClick={toggleDropdown.bind(this)}>
-                    <h3>Search Fields</h3>
-                    <div class="hamburger">
-                        <span></span>
-                    </div>
-                </div>
-                <div className='Catalog-body'>
-                    {/* https://codepen.io/chriscoyier/pen/AvYQdv?editors=1100 */}
-                    <form action="#">
-
-                    <header>
-                        <h2>Search Form</h2>
-                    </header>
-
-                    <div>
-                        <label class="desc" id="title1" for="Field1">Full Name</label>
-                        <div>
-                            <input id="Field1" name="Field1" type="text" class="field text fn" value="" size="8" tabindex="1"></input>
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="desc" id="title3" for="Field3">
-                            Email
-                        </label>
-                        <div>
-                            <input id="Field3" name="Field3" type="email" spellcheck="false" value="" maxlength="255" tabindex="3"></input>
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="desc" id="title4" for="Field4">
-                            Message
-                        </label>
-
-                        <div>
-                            <textarea id="Field4" name="Field4" spellcheck="true" rows="10" cols="50" tabindex="4"></textarea>
-                        </div>
-                    </div>
-
-                    <div>
-                        <fieldset>
-
-                            <legend id="title5" class="desc">
-                                Select a Choice
-                            </legend>
-
-                            <div>
-                                <input id="radioDefault_5" name="Field5" type="hidden" value=""></input>
-                                <div>
-                                    <input id="Field5_0" name="Field5" type="radio" value="First Choice" tabindex="5" checked="checked"></input>
-                                    <label class="choice" for="Field5_0">First Choice</label>
-                                </div>
-                                <div>
-                                    <input id="Field5_1" name="Field5" type="radio" value="Second Choice" tabindex="6"></input>
-                                    <label class="choice" for="Field5_1">Second Choice</label>
-                                </div>
-                                <div>
-                                    <input id="Field5_2" name="Field5" type="radio" value="Third Choice" tabindex="7"></input>
-                                    <label class="choice" for="Field5_2">Third Choice</label>
-                                </div>
-                            </div>
-                        </fieldset>
-                    </div>
-
-                    <div>
-                        <fieldset>
-                            <legend id="title6" class="desc">
-                                Check All That Apply
-                            </legend>
-                            <div>
-                                <div>
-                                    <input id="Field6" name="Field6" type="checkbox" value="First Choice" tabindex="8"></input>
-                                    <label class="choice" for="Field6">First Choice</label>
-                                </div>
-                                <div>
-                                    <input id="Field7" name="Field7" type="checkbox" value="Second Choice" tabindex="9"></input>
-                                    <label class="choice" for="Field7">Second Choice</label>
-                                </div>
-                                <div>
-                                    <input id="Field8" name="Field8" type="checkbox" value="Third Choice" tabindex="10"></input>
-                                    <label class="choice" for="Field8">Third Choice</label>
-                                </div>
-                            </div>
-                        </fieldset>
-                    </div>
-
-                    <div>
-                        <label class="desc" id="title106" for="Field106">
-                            Select a Choice
-                        </label>
-                        <div>
-                            <select id="Field106" name="Field106" class="field select medium" tabindex="11">
-                                <option value="First Choice">First Choice</option>
-                                <option value="Second Choice">Second Choice</option>
-                                <option value="Third Choice">Third Choice</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div>
-                        <div>
-                            <input id="saveForm" name="saveForm" type="submit" value="Submit"></input>
-                        </div>
-                    </div>
-
-                </form>
-                </div>
+                <input type="text" value={this.state.filterText} placeholder="Search..." onChange={this.updateFilter.bind(this)} />
+                <DataTable
+                    columns={columns}
+                    data={data.filter((item) => {
+                        if (this.state.filterText === "") {
+                            return item;
+                        } else if (
+                            item.title.toLowerCase().includes(this.state.filterText.toLowerCase())
+                        ) {
+                            return item;
+                        }
+                    })}
+                />
             </div>
         )
     }
 }
-
-
 
 export default Catalog;

@@ -30,7 +30,9 @@ class ListItem extends Component {
       maxWidth: "75%",
       margin: "auto",
   }
-
+  const style = {
+    
+  }
     return (
       <span onClick={this.handleClick.bind(this)} style={{ color: this.state.color }}>
         <div class="mx-auto">

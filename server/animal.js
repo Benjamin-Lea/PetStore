@@ -7,6 +7,7 @@ mongoose.connect(uri);
 var animalSchema = new mongoose.Schema({
     name: { type: String, required: true, unique: true },
     species: { type: String, required: true },
+    price: { type: Number, required: true, default: 0, min: 0},
     breed: String,
     gender: { type: String, enum: ['male', 'female'] },
     traits: [String],
