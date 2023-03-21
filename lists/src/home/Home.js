@@ -29,7 +29,7 @@ class Home extends Component {
   renderSlides() {
     if (this.state.lists != null) {
       return this.state.lists.map((list) => {
-        return this.state.items[list].map((item, index) => {
+        return this.state.items[list].animalNames.map((item, index) => {
           return (
             <div key={index}>
               <SLideShowItem list={list} item={item} />
