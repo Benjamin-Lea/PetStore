@@ -3,6 +3,7 @@ import * as React from "react";
 import {Routes, Route, Outlet, Link } from "react-router-dom";
 import Admin from './admin/Admin.js';
 import Home from './home/Home.js';
+import Catalog from './Catalog/Catalog.js';
 
 export default function App() {
   return (
@@ -11,6 +12,7 @@ export default function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/catalog" element={<Catalog />} />
         </Route>
       </Routes>
     </div>
@@ -25,6 +27,7 @@ function Layout() {
           <div>
           <Link to="/" class="navbar-brand" > Pet Store </Link>
           <Link to="/" class="btn btn-dark"> Home </Link>
+          <Link to="/catalog" class="btn btn-secondary"> Catalog </Link>
           </div>
             <ul class="navbar-nav">
               <li class="nav-item">
