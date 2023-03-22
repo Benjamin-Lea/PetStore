@@ -23,6 +23,7 @@ class AddItem extends Component {
   }
 
   handleSubmit(e) {
+    window.location.reload();
     e.preventDefault();
     fetch('/addItem', {
       headers: { 'Content-Type': 'application/json' },
@@ -34,16 +35,18 @@ class AddItem extends Component {
           imageURL: this.state.imageURL,
           breed: this.state.breed,
           age: this.state.age,
-          gender: this.state
+          gender: this.state.gender,
+          price: this.state.price
         }
       )
     });
-    console.log(this.state.listName + this.state.petName);
     this.setState({
       petName: '',
       imageURL: '',
       breed: '',
-      age: ''
+      age: '',
+      gender: 'male',
+      price: ''
     });
   }
 
@@ -57,10 +60,11 @@ class AddItem extends Component {
             <input type="text" className="form-control form-control-sm" placeholder="Image URL" ref="imageURL" value={this.state.imageURL} onChange={(e) => this.handleChange(e, "imageURL")} />
             <input type="text" className="form-control form-control-sm" placeholder="Breed" ref="breed" value={this.state.breed} onChange={(e) => this.handleChange(e, "breed")} />
             <input type="number" className="form-control form-control-sm" placeholder="Age" ref="age" value={this.state.age} onChange={(e) => this.handleChange(e, "age")} />
+            <input type="number" className="form-control form-control-sm" placeholder="Price" ref="price" value={this.state.price} onChange={(e) => this.handleChange(e, "price")} />
             <p> </p>
-            <input type="radio" name="gender" value="male" checked={this.state.gender === "male"} onChange={(e) => this.handleChange(e, "gender")} />
+            <input type="radio" name="gender" value="male" onChange={(e) => this.handleChange(e, "gender")} />
             <label for="male">Male</label>
-            <input type="radio" name="gender" value="female" checked={this.state.gender === "female"} onChange={(e) => this.handleChange(e, "gender")} />
+            <input type="radio" name="gender" value="female" onChange={(e) => this.handleChange(e, "gender")} />
             <label for="female">Female</label>
           </div>
           <div><button className="btn btn btn-secondary btn-sm" type="submit">Add Pet</button></div>

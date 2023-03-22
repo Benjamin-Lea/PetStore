@@ -19,7 +19,7 @@ class Home extends Component {
 
   // Get the data from the server
   componentDidMount() {
-    fetch('/adminData')
+    fetch('/animalData')
       .then(response => response.json())
       .then(listsData => {
         this.setState({ lists: listsData.lists, items: listsData.items });
@@ -27,12 +27,14 @@ class Home extends Component {
   }
 
   renderSlides() {
+    console.log(this.state.items)
     if (this.state.lists != null) {
       return this.state.lists.map((list) => {
         return this.state.items[list].animalNames.map((item, index) => {
+          console.log(this.state.items[list])
           return (
             <div key={index}>
-              <SLideShowItem list={list} item={item} />
+              <SLideShowItem list={list} name={item} imageURLs={this.state.items[list].animalImageURLs[index]} />
             </div>
           );
         });
@@ -45,11 +47,11 @@ class Home extends Component {
       dots: true,
       arrows: false,
       infinite: true,
-      speed: 500,
+      speed: 1000,
       slidesToShow: 1,
       slidesToScroll: 1,
-      autoplaySpeed: 2000,
-      cssEase: "linear"
+      autoplaySpeed: 5000,
+      cssEase: "linear",
     };
     return (
       <div style={{ margin: "auto"}}>

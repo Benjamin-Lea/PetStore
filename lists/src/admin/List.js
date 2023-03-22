@@ -24,7 +24,9 @@ class List extends Component {
                   breed={items.animalBreeds[index]} 
                   age={items.animalAges[index]} 
                   gender={items.animalGenders[index]}
-                  imageURLs={items.animalImageURLs[index]} key={uuidv4()} />
+                  imageURLs={items.animalImageURLs[index]} 
+                  price={items.animalPrices[index]}
+                    key={uuidv4()} />
                 </li>
               )
             })}

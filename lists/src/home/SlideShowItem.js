@@ -7,24 +7,25 @@ class SlideShowItem extends Component {
         super(props);
         this.state = {
             list: this.props.list, // this is the name of the list
-            item: this.props.item // this is the item object
+            // name: this.props.name // this is the item object
         };
     }
 
     renderItems() {
-        const item = this.props.item;
         const list = this.props.list;
+        const name = this.props.name;
+        const imageURLs = this.props.imageURLs;
         const imageStyle = {
             height: "50vh",
             maxWidth: "75%",
             margin: "auto",
         }
-        if (item != null) {
+        if (name != null) {
             return(
                 <div>
                     <h2>{list}</h2>
-                    <h3>{item.name}</h3>
-                    <img style={imageStyle} src={item.image} alt={item.name} />
+                    <h3>{name}</h3>
+                    <img style={imageStyle} src={imageURLs} alt={name} />
                 </div>
             )
         }

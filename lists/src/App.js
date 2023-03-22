@@ -26,7 +26,6 @@ function Layout() {
         <div class="container-fluid">
           <div>
           <Link to="/" class="navbar-brand" > Pet Store </Link>
-          <Link to="/" class="btn btn-dark"> Home </Link>
           <Link to="/catalog" class="btn btn-secondary"> Catalog </Link>
           </div>
             <ul class="navbar-nav">

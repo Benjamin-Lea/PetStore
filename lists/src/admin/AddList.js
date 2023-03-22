@@ -21,7 +21,7 @@ class AddList extends Component {
     // this.setState({ list: this.state.list });
     // this.props.addList(this.state);
     // this.setState({ list: '' })
-    const response = fetch('/addList', {
+    fetch('/addList', {
       headers: { 'Content-Type': 'application/json' },
       method: 'POST',
       body: JSON.stringify(

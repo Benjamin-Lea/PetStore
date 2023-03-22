@@ -35,6 +35,7 @@ class Admin extends Component {
    */
   handleAddItem(s) {
     // Implement this function!
+    // refresh the page to see the new item 
     this.setState({ items: { ...this.state.items, [s.listName]: this.state.items[s.listName].concat(s.newItem) } });
   }
 
@@ -46,7 +47,7 @@ class Admin extends Component {
    * Insparation from https://reactjs.org/docs/faq-ajax.html
    */
   componentDidMount() {
-    fetch('/adminData')
+    fetch('/animalData')
       .then(response => response.json())
       .then(listsData => {
         this.setState({ lists: listsData.lists, items: listsData.items });
