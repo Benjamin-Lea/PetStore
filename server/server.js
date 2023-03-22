@@ -15,6 +15,7 @@ mongoose.connect(uri);
 
 var Animal = require('./animal.js');
 var Species = require('./species.js');
+var Supply = require('./supplies.js');
 
 app.use(express.static(path.join(__dirname, '..', 'lists', 'build')));
 
@@ -56,6 +57,35 @@ app.use('/adminData', async (req, res) => {
   } catch (err) {
     console.log("Error occurred loading admin data");
   }
+  res.json(data);
+});
+
+app.use('/catalogData', async (req, res) => {
+  try {
+    console.log("In /catalogData");
+    // Get the animals
+    var animals = await database.collection('animals').find({}).toArray();
+    // get the supplies
+    var supplies = await database.collection('supplies').find({}).toArray();
+    // combine the two
+    var combo = animals.concat(supplies);
+    
+    var data = []; // array of objects
+    for(let index = 0; index < combo.length; index++) { // create our catalog data
+      data[index] = { name: combo[index].name,
+                      price: combo[index].price ? combo[index].price : 0,
+                      type: combo[index].age ? "animal" : "supply",
+                      imageURL: combo[index].imageURL,
+                      species: combo[index].species ? combo[index].species : '-',
+                      breed: combo[index].breed ? combo[index].breed : '-',
+                      age: combo[index].age ? combo[index].age : '-',
+                      gender: combo[index].gender ? combo[index].gender : '-',
+                    };
+    }
+  } catch (err) {
+    console.log("Error occurred loading catalog data");
+  }
+  // send the data
   res.json(data);
 });
 

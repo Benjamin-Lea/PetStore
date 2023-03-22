@@ -5,8 +5,8 @@ mongoose.connect(uri);
 
 var suppliesSchema = new mongoose.Schema({
     name: { type: String, required: true, unique: true },
-    Price: { type: Number, required: true },
-    img: { type: String, required: true }
+    price: { type: Number, required: true, default: 0, min: 0},
+    imageURL: { type: String, required: true, default: "https://static.wikia.nocookie.net/bindingofisaac/images/e/ee/Breakfast_%28item%29.png/revision/latest?cb=20200916132229&path-prefix=it" }
     });
 
 module.exports = mongoose.model('Supplie', suppliesSchema);

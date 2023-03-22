@@ -6,44 +6,58 @@ import DataTable from 'react-data-table-component';
 
 const columns = [
     {
-        name: 'Title',
-        selector: row => row.title,
+        name: 'Name',
+        selector: row => row.name,
+        width: "auto",
     },
     {
-        name: 'Year',
-        selector: row => row.year,
+        name: 'Price',
+        selector: row => row.price,
+    },
+    {
+        name: 'Type',
+        selector: row => row.type,
+    },
+    {
+        name: 'Image',
+        selector: row => row.imageURL,
+        // show image in table
+
+    },
+    {
+        name: 'Species',
+        selector: row => row.species,
+    },
+    {
+        name: 'Breed',
+        selector: row => row.breed,
+    },
+    {
+        name: 'Age',
+        selector: row => row.age,
+    },
+    {
+        name: 'Gender',
+        selector: row => row.gender,
     },
 ];
 
-const data = [
-    {
-        id: 1,
-        title: 'Beetlejuice',
-        year: '1988',
-    },
-    {
-        id: 2,
-        title: 'Ghostbusters',
-        year: '1984',
-    },
-]
 
 class Catalog extends Component {
     constructor() {
         super();
         this.state = {
-            lists: [], // this holds the name of each list
-            items: {}, // this property names of this object are the names of the lists; their values are arrays of the items in each list
+            data: [],
             filterText: ""
         };
     }
 
     componentDidMount() {
-        fetch('/adminData')
-            .then(response => response.json())
-            .then(listsData => {
-                this.setState({ lists: listsData.lists, items: listsData.items });
-            });
+        fetch('/catalogData')
+          .then(response => response.json())
+          .then(responseData => {
+            this.setState({ data: responseData });
+          })
     }
 
     updateFilter(event) {
@@ -56,11 +70,17 @@ class Catalog extends Component {
                 <input type="text" value={this.state.filterText} placeholder="Search..." onChange={this.updateFilter.bind(this)} />
                 <DataTable
                     columns={columns}
-                    data={data.filter((item) => {
+                    data={this.state.data.filter((item) => {
                         if (this.state.filterText === "") {
                             return item;
                         } else if (
-                            item.title.toLowerCase().includes(this.state.filterText.toLowerCase())
+                            item.name.toLowerCase().includes(this.state.filterText.toLowerCase())
+                            || item.price == this.state.filterText
+                            || item.type.toLowerCase().includes(this.state.filterText.toLowerCase())
+                            || item.species.toLowerCase().includes(this.state.filterText.toLowerCase())
+                            || item.breed.toLowerCase().includes(this.state.filterText.toLowerCase())
+                            || item.age ==  this.state.filterText
+                            || item.gender.toLowerCase().includes(this.state.filterText.toLowerCase())
                         ) {
                             return item;
                         }
