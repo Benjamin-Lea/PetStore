@@ -9,7 +9,7 @@ class Admin extends Component {
     super();
     this.state = {
       lists: [], // this holds the name of each list
-      items: {} // this property names of this object are the names of the lists; their values are arrays of the items in each list
+      items: {}, // this property names of this object are the names of the lists; their values are arrays of the items in each list
     };
   }
 

@@ -49,15 +49,9 @@ class ListItem extends Component {
       width: "auto",
       height: "auto",
     }
-    const cardStyle = {
-      marginLeft: "10px",
-      marginRight: "10px",
-      marginTop: "10px",
-      marginBottom: "10px",
-    }
     return (
       <div class="mx-auto">
-        <div class="card" style={cardStyle}>
+        <div class="card" id="customCard">
           <img src={imageURLs} class="card-img-top" alt="Pet Image" style={imageStyle} />
           <div class="card-body">
             <h5 id="card-text">Pet Name: {name}</h5>

@@ -48,10 +48,10 @@ class AddList extends Component {
       <div id="addListDiv">
         <form onSubmit={this.handleSubmit.bind(this)} class="row g-3">
           <div id='addList' class="col">
-            <input type="text" class="form-control" placeholder="Add new list:" ref='id' id='newID' value={this.state.list} onChange={this.handleChange.bind(this)} />
+            <input type="text" class="form-control" placeholder="Add New Animal:" ref='id' id='newID' value={this.state.list} onChange={this.handleChange.bind(this)} />
           </div>
           <div class="col-auto">
-            <button class="btn btn-light" type="submit" >Add List</button>
+            <button class="btn btn-light" type="submit" >Add Animal</button>
           </div>
         </form>
       </div>

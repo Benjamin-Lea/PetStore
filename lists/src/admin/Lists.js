@@ -11,7 +11,7 @@ class Lists extends Component {
     if(this.props.lists.length === 0) {
       return (
         <div id="listDiv" className="List">
-          <h3 style={{color: 'black'}}> Add new lists to get started!</h3>
+          <h3 style={{color: 'black'}}> Add new animal to get started!</h3>
         </div>
       );
     }

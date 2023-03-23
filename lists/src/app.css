@@ -1,6 +1,9 @@
-.slick-prev:before,
-.slick-next:before {
-  color: black!important; 
+
+#customCard {
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 h1 {
@@ -37,7 +40,14 @@ dl {
   list-style-type: disc;
 }
 
-.listUL {
+.suppliesListUL{
+  text-align: center;
+  background-color: #d4f779;
+  margin: auto;
+  padding-left: 0;
+}
+
+.animallistUL {
   list-style-type: none;
   text-align: center;
   background-color: #d4f779;
@@ -67,6 +77,13 @@ dl {
     margin-left: 40px;
     margin-right: 40px;
   }
+}
+
+#addSupplysDiv {
+  background-color: lightblue;
+  margin: 40px auto 10px auto;
+  padding: 10px;
+  border-radius: 5px;
 }
 
 #addListDiv {

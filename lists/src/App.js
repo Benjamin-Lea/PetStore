@@ -4,6 +4,7 @@ import {Routes, Route, Outlet, Link } from "react-router-dom";
 import Admin from './admin/Admin.js';
 import Home from './home/Home.js';
 import Catalog from './Catalog/Catalog.js';
+import Mechandise from './admin/Merchandise.js';
 
 export default function App() {
   return (
@@ -12,6 +13,7 @@ export default function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/admin/Mechandise" element={<Mechandise />} />
           <Route path="/catalog" element={<Catalog />} />
         </Route>
       </Routes>
@@ -27,6 +29,7 @@ function Layout() {
           <div>
           <Link to="/" class="navbar-brand" > Pet Store </Link>
           <Link to="/catalog" class="btn btn-secondary"> Catalog </Link>
+          <Link to="/admin/Mechandise"> Admin2 </Link>
           </div>
             <ul class="navbar-nav">
               <li class="nav-item">

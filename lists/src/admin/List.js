@@ -16,7 +16,7 @@ class List extends Component {
           <div id="listDiv">
             <h3>{name}</h3>
           </div>
-          <ul class="listUL">
+          <ul class="animallistUL">
             {items.animalNames.map(function (name, index) {
               return (
                 <li key={uuidv4()}>
