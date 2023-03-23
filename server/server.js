@@ -80,7 +80,8 @@ app.use('/catalogData', async (req, res) => {
     
     var data = []; // array of objects
     for(let index = 0; index < combo.length; index++) { // create our catalog data
-      data[index] = { name: combo[index].name,
+      data[index] = { id: combo[index]._id,
+                      name: combo[index].name,
                       price: combo[index].price ? combo[index].price : 0,
                       type: combo[index].age ? "animal" : "supply",
                       imageURL: combo[index].imageURL,
