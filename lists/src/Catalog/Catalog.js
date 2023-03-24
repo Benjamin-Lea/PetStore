@@ -92,7 +92,14 @@ class Catalog extends Component {
                             return item;
                     }).map(item => (
                         <Col key={item.id}>
-                            <StoreItem item={item} />
+                            <StoreItem 
+                                item={item} 
+                                cart={this.props.cart} 
+                                increaseCartQuantity={this.props.increaseCartQuantity}
+                                decreaseCartQuantity={this.props.decreaseCartQuantity}
+                                removeFromCart={this.props.removeFromCart}
+                                getQuantity={this.props.getQuantity}
+                                />
                         </Col>
                     ))}
                 </Row>

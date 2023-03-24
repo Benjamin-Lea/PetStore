@@ -1,38 +1,27 @@
-class CartInterface {
-    constructor() {
-        this.cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
+export default function cartReducer(cart, action) {
+    switch (action.type) {
+      case "increaseCartQuantity":{
+        console.log("increaseCartQuantity");
+        // make change to cart and return cart
+        cart.find((item) => item.id === action.id) ? cart.find((item) => item.id === action.id).quantity += 1 : cart.push({ id: action.id, quantity: 1 });
+        return cart;
     }
-    
-    saveCart() {
-        localStorage.setItem('cart', JSON.stringify(this.cart));
-    }
-
-    increaseCartQuantity(id) {
-        if (!this.cart[id]) {
-            this.cart[id] = 1;
+      case "decreaseCartQuantity":{
+        console.log("decreaseCartQuantity");
+        // make change to cart and return cart
+        if (cart.find((item) => item.id === action.id) && cart.find((item) => item.id === action.id).quantity > 1) {
+          cart.find((item) => item.id === action.id).quantity -= 1;
         }
-        else {
-            this.cart[id] = this.cart[id] + 1;
-        }
-        this.saveCart();
+        else
+            cart = cart.filter((item) => item.id !== action.id);
+        return cart;        
     }
-    decreaseCartQuantity(id) {
-        if (this.cart[id] <= 1) {
-            this.removeFromCart(id);
-        }
-        else {
-            this.cart[id] = this.cart[id] - 1;
-        }
-        this.saveCart();
+      case "removeFromCart":{
+        cart = cart.filter((item) => item.id !== action.id);
+        return cart;
+      }
+      default:{
+        console.log("Error: Invalid action type: "); console.log(action.type);
+        throw Error("Invalid action type" + action.type);}
     }
-    removeFromCart(id) {
-        this.cart[id] = 0;
-        this.saveCart();
-    }
-    getItemQuantity(id) {
-        return this.cart[id];
-    }
-
-}
-
-export default new CartInterface();
+  }
