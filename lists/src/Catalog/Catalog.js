@@ -3,49 +3,11 @@ import { Col, Row, InputGroup, Form } from 'react-bootstrap';
 import '../app.css';
 import './Catalog.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import StoreItem from './StoreItem';
-
-const columns = [
-    {
-        name: 'Name',
-        selector: row => row.name,
-
-    },
-    {
-        name: 'Price',
-        selector: row => row.price,
-    },
-    {
-        name: 'Type',
-        selector: row => row.type,
-    },
-    {
-        name: 'Image',
-        Cell: props => (<img src={props.row.imageURL} alt="pet" />)
-
-    },
-    {
-        name: 'Species',
-        selector: row => row.species,
-    },
-    {
-        name: 'Breed',
-        selector: row => row.breed,
-    },
-    {
-        name: 'Age',
-        selector: row => row.age,
-    },
-    {
-        name: 'Gender',
-        selector: row => row.gender,
-    },
-];
-
+import { StoreItem } from './StoreItem';
 
 class Catalog extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             data: [],
             filterText: ""
@@ -92,14 +54,7 @@ class Catalog extends Component {
                             return item;
                     }).map(item => (
                         <Col key={item.id}>
-                            <StoreItem 
-                                item={item} 
-                                cart={this.props.cart} 
-                                increaseCartQuantity={this.props.increaseCartQuantity}
-                                decreaseCartQuantity={this.props.decreaseCartQuantity}
-                                removeFromCart={this.props.removeFromCart}
-                                getQuantity={this.props.getQuantity}
-                                />
+                            <StoreItem {...item} />
                         </Col>
                     ))}
                 </Row>

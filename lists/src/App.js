@@ -5,76 +5,41 @@ import { Offcanvas, Button } from "react-bootstrap";
 import Admin from './admin/Admin.js';
 import Home from './home/Home.js';
 import Catalog from './Catalog/Catalog.js';
-import cartReducer from "./Cart/CartInterface.js";
-import Cart from "./Cart/Cart.js";
+import { CartProvider } from "./Cart/CartContext.js";
+import { useCart } from "./Cart/CartContext.js";
 
 export default function App() {
-  const [cart, dispatch] = React.useReducer(cartReducer, initialCart);
 
-  // moving the cart functions to dispatch here globally
-  function increaseCartQuantity(id) {
-    dispatch({
-      type: "increaseCartQuantity",
-      id: id,
-    });
-  }
-
-  function decreaseCartQuantity(id) {
-    dispatch({
-      type: "decreaseCartQuantity",
-      id: id,
-    });
-  }
-
-  function removeFromCart(id) {
-    dispatch({
-      type: "removeFromCart",
-      id: id,
-    });
-  }
-  function getQuantity(id) {
-    return cart.find((item) => item.id === id) ? cart.find((item) => item.id === id).quantity : 0;
-  }
-
-    return (
+  return (
+    <CartProvider>
       <div>
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
             <Route path="/admin" element={<Admin />} />
-            <Route path="/catalog" element={<Catalog 
-              cart={cart}
-              increaseCartQuantity={increaseCartQuantity}
-              decreaseCartQuantity={decreaseCartQuantity}
-              removeFromCart={removeFromCart}
-              getQuantity={getQuantity}
-              />} />
-            <Route path="/cart" element={<Cart 
-              cart={cart}
-              increaseCartQuantity={increaseCartQuantity}
-              decreaseCartQuantity={decreaseCartQuantity}
-              removeFromCart={removeFromCart}
-              getQuantity={getQuantity}
-            />} />
+            <Route path="/catalog" element={<Catalog />} />
           </Route>
         </Routes>
       </div>
-    );
-  }
+    </CartProvider>
+  );
+}
 
-  function Layout() {
-    return (
-      <div>
-        <nav class="navbar navbar-expand navbar-dark bg-dark sticky-top">
-          <div class="container-fluid">
-            <div>
-              <Link to="/" class="navbar-brand" > Pet Store </Link>
-              <Link to="/catalog" class="btn btn-secondary space-right2"> Catalog </Link>
-              <Link to="/admin" class="btn btn-secondary"> Login </Link>
-            </div>
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <Button style={{ width: "3rem", height: "3rem", position: "relative" }} variant="outline-primary" className="rounded-circle bg-white">
+function Layout() {
+  const { openCart, cartQuantity } = useCart();
+  return (
+    <div>
+      <nav class="navbar navbar-expand navbar-dark bg-dark sticky-top">
+        <div class="container-fluid">
+          <div>
+            <Link to="/" class="navbar-brand" > Pet Store </Link>
+            <Link to="/catalog" class="btn btn-secondary space-right2"> Catalog </Link>
+            <Link to="/admin" class="btn btn-secondary"> Login </Link>
+          </div>
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              {cartQuantity > 0 && (
+                <Button onClick={openCart} style={{ width: "3rem", height: "3rem", position: "relative" }} variant="outline-primary" className="rounded-circle bg-white">
                   <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                     <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round">
@@ -93,16 +58,17 @@ export default function App() {
                       right: "0",
                       transform: "translate(25%, 25%)"
                     }}
-                  >3
+                  >{cartQuantity}
                   </div>
                 </Button>
-              </li>
-            </ul>
-          </div>
-        </nav>
-        <Outlet />
-      </div>
-    );
-  }
+              )}
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <Outlet />
+    </div>
+  );
+}
 
-  const initialCart = [{id: 1, quantity: 1}];
+const initialCart = { id: 1, quantity: 1 }; // probably load this from localstorage
