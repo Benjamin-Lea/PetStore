@@ -1,51 +1,13 @@
 import React, { Component } from 'react';
+import { Col, Row, InputGroup, Form } from 'react-bootstrap';
 import '../app.css';
 import './Catalog.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import DataTable from 'react-data-table-component';
-
-const columns = [
-    {
-        name: 'Name',
-        selector: row => row.name,
-        width: "auto",
-    },
-    {
-        name: 'Price',
-        selector: row => row.price,
-    },
-    {
-        name: 'Type',
-        selector: row => row.type,
-    },
-    {
-        name: 'Image',
-        selector: row => row.imageURL,
-        // show image in table
-
-    },
-    {
-        name: 'Species',
-        selector: row => row.species,
-    },
-    {
-        name: 'Breed',
-        selector: row => row.breed,
-    },
-    {
-        name: 'Age',
-        selector: row => row.age,
-    },
-    {
-        name: 'Gender',
-        selector: row => row.gender,
-    },
-];
-
+import { StoreItem } from './StoreItem';
 
 class Catalog extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             data: [],
             filterText: ""
@@ -54,10 +16,10 @@ class Catalog extends Component {
 
     componentDidMount() {
         fetch('/catalogData')
-          .then(response => response.json())
-          .then(responseData => {
-            this.setState({ data: responseData });
-          })
+            .then(response => response.json())
+            .then(responseData => {
+                this.setState({ data: responseData });
+            })
     }
 
     updateFilter(event) {
@@ -67,25 +29,35 @@ class Catalog extends Component {
     render() {
         return (
             <div className='Catalog'>
-                <input type="text" value={this.state.filterText} placeholder="Search..." onChange={this.updateFilter.bind(this)} />
-                <DataTable
-                    columns={columns}
-                    data={this.state.data.filter((item) => {
-                        if (this.state.filterText === "") {
+                <InputGroup size="lg" className='InputGroup'>
+                    <Form.Control
+                        aria-label="Large"
+                        aria-describedby="inputGroup-sizing-sm"
+                        value={this.state.filterText}
+                        placeholder="Search..."
+                        onChange={this.updateFilter.bind(this)}
+                    />
+                </InputGroup>
+                <Row md={2} lg={3} xl={4} className="g-3">
+                    {this.state.data.filter((item) => {
+                        if (this.state.filterText === "")
                             return item;
-                        } else if (
+                        else if (
                             item.name.toLowerCase().includes(this.state.filterText.toLowerCase())
                             || item.price == this.state.filterText
                             || item.type.toLowerCase().includes(this.state.filterText.toLowerCase())
                             || item.species.toLowerCase().includes(this.state.filterText.toLowerCase())
                             || item.breed.toLowerCase().includes(this.state.filterText.toLowerCase())
-                            || item.age ==  this.state.filterText
+                            || item.age == this.state.filterText
                             || item.gender.toLowerCase().includes(this.state.filterText.toLowerCase())
-                        ) {
+                        )
                             return item;
-                        }
-                    })}
-                />
+                    }).map(item => (
+                        <Col key={item.id}>
+                            <StoreItem {...item} />
+                        </Col>
+                    ))}
+                </Row>
             </div>
         )
     }
