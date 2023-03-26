@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import Lists from './Lists.js';
 import AddList from './AddList.js';
+import AdminNav from './adminNav.js';
 import '../app.css';
 
-class Admin extends Component {
+class AdminPets extends Component {
 
   constructor() {
     super();
     this.state = {
       lists: [], // this holds the name of each list
-      items: {}, // this property names of this object are the names of the lists; their values are arrays of the items in each list
+      pets: {}, // this property names of this object are the names of the lists; their values are arrays of the items in each list
+      token: '',
     };
   }
 
@@ -21,8 +23,8 @@ class Admin extends Component {
    */
   handleAddList(s) {
     let newLists = this.state.lists.concat(s.list);
-    let newItems = { ...this.state.items, [s.list]: [] }; // ... is the spread operator https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax
-    this.setState({ lists: newLists, items: newItems });
+    let newPets = { ...this.state.pets, [s.list]: [] }; // ... is the spread operator https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax
+    this.setState({ lists: newLists, pets: newPets });
   }
 
   /**
@@ -33,10 +35,10 @@ class Admin extends Component {
    * to an array of the items in that list. After updating the "items" part of 
    * the state, this function  should then re-render this App component.
    */
-  handleAddItem(s) {
+  handleAddPet(s) {
     // Implement this function!
     // refresh the page to see the new item 
-    this.setState({ items: { ...this.state.items, [s.listName]: this.state.items[s.listName].concat(s.newItem) } });
+    this.setState({ pets: { ...this.state.pets, [s.listName]: this.state.pets[s.listName].concat(s.newPet) } });
   }
 
 
@@ -47,10 +49,21 @@ class Admin extends Component {
    * Insparation from https://reactjs.org/docs/faq-ajax.html
    */
   componentDidMount() {
+    let token = localStorage.getItem('token');
+    fetch('/authorized', {
+      headers: {
+        'token': token
+      }
+    }).then(response => response.json())
+      .then((data) => {
+        if (data.status != true) {
+          window.location.href = '/admin/login';
+        }
+      }).catch((err) => { console.log(err); });
     fetch('/animalData')
       .then(response => response.json())
       .then(listsData => {
-        this.setState({ lists: listsData.lists, items: listsData.items });
+        this.setState({ lists: listsData.lists, pets: listsData.pets });
       })
   }
 
@@ -58,12 +71,12 @@ class Admin extends Component {
    * Renders the component.
    */
   render() {
-    console.log(this.state);
     return (
-      <div className="Admin">
+      <div>
+        <AdminNav />
         <AddList addList={this.handleAddList.bind(this)} />
         <div id="listsDiv" className="List">
-          <Lists lists={this.state.lists} items={this.state.items} addItem={this.handleAddItem.bind(this)} />
+          <Lists lists={this.state.lists} pets={this.state.pets} addPet={this.handleAddPet.bind(this)} />
         </div>
       </div>
     );
@@ -71,4 +84,4 @@ class Admin extends Component {
 
 }
 
-export default Admin;
+export default AdminPets;

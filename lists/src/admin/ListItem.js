@@ -21,7 +21,7 @@ class ListItem extends Component {
 
   handleRemove(name) {
     window.location.reload();
-    fetch(`/api/items/${name}`, {
+    fetch(`/api/pet/${name}`, {
       method: 'DELETE'
     })
     .then(response => {

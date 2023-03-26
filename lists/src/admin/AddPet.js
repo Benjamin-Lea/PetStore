@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-class AddItem extends Component {
+class AddPet extends Component {
 
   constructor() {
     super();
@@ -12,20 +12,20 @@ class AddItem extends Component {
       breed: '',
       age: '',
       gender: 'male',
-      newItem: {}
+      newPet: {}
     }
   }
 
   handleChange(e, property) {
     this.setState({ [property]: e.target.value });
     this.setState({ listName: this.props.idName });
-    this.setState({ newItem: { [property]: e.target.value } });
+    this.setState({ newPet: { [property]: e.target.value } });
   }
 
   handleSubmit(e) {
     window.location.reload();
     e.preventDefault();
-    fetch('/addItem', {
+    fetch('/addPet', {
       headers: { 'Content-Type': 'application/json' },
       method: 'POST',
       body: JSON.stringify(
@@ -76,4 +76,4 @@ class AddItem extends Component {
 }
 
 
-export default AddItem;
+export default AddPet;

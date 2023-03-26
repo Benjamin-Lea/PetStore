@@ -17,14 +17,14 @@ class Lists extends Component {
     }
 
     // Otherwise, for each list, create a div
-    var items = this.props.items;
+    var pets = this.props.pets;
     var lists = this.props.lists;
-    var addItem = this.props.addItem;
+    var addPet = this.props.addPets;
     return (
       <div key={uuidv4()}>
       {lists.map(function(listName) {
         return (
-          <List name={listName} items={items[listName]} addItem={addItem.bind(this)} key={uuidv4()} />
+          <List name={listName} pets={pets[listName]}  key={uuidv4()} addPet={addPet} />
         )
       })}
       </div>

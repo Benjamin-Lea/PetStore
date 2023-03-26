@@ -13,7 +13,7 @@ class Home extends Component {
     super();
     this.state = {
       lists: [], // this holds the name of each list
-      items: {} // this property names of this object are the names of the lists; their values are arrays of the items in each list
+      pets: {} // this property names of this object are the names of the lists; their values are arrays of the pets in each list
     };
   }
 
@@ -22,19 +22,19 @@ class Home extends Component {
     fetch('/animalData')
       .then(response => response.json())
       .then(listsData => {
-        this.setState({ lists: listsData.lists, items: listsData.items });
+        this.setState({ lists: listsData.lists, pets: listsData.pets });
       })
   }
 
   renderSlides() {
-    console.log(this.state.items)
+    console.log(this.state.pets)
     if (this.state.lists != null) {
       return this.state.lists.map((list) => {
-        return this.state.items[list].animalNames.map((item, index) => {
-          console.log(this.state.items[list])
+        return this.state.pets[list].animalNames.map((pet, index) => {
+          console.log(this.state.pets[list])
           return (
             <div key={index}>
-              <SLideShowItem list={list} name={item} imageURLs={this.state.items[list].animalImageURLs[index]} />
+              <SLideShowItem list={list} name={pet} imageURLs={this.state.pets[list].animalImageURLs[index]} />
             </div>
           );
         });

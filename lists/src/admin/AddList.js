@@ -6,7 +6,7 @@ class AddList extends Component {
     super(props);
     this.state = {
       list: '',
-      items: [],
+      pets: [],
       multipleItems: false
     };
   }
@@ -30,11 +30,10 @@ class AddList extends Component {
         }
       )
     });
-    console.log(this.state.list);
 
     this.setState({
       list: '',
-      items: [],
+      pets: [],
       multipleItems: false
     });
   }

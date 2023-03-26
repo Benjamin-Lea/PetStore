@@ -2,12 +2,13 @@
 import * as React from "react";
 import { Routes, Route, Outlet, Link } from "react-router-dom";
 import { Offcanvas, Button } from "react-bootstrap";
-import Admin from './admin/Admin.js';
+import AdminPets from './admin/AdminPets.js';
 import Home from './home/Home.js';
 import Catalog from './Catalog/Catalog.js';
-import Mechandise from './admin/Merchandise.js';
+import AdminMerchandise from './admin/AdminMerchandise.js';
 import { CartProvider } from "./Cart/CartContext.js";
 import { useCart } from "./Cart/CartContext.js";
+import AdminLogin from './admin/AdminLogin.js';
 
 export default function App() {
 
@@ -17,8 +18,10 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
-            <Route path="/admin" element={<Admin />} />
             <Route path="/catalog" element={<Catalog />} />
+            <Route path="/admin/Login" element={<AdminLogin />} />
+            <Route path="/admin/pets" element={<AdminPets />} />
+            <Route path="/admin/merchandise" element={<AdminMerchandise />} />
           </Route>
         </Routes>
       </div>
@@ -35,7 +38,7 @@ function Layout() {
           <div>
             <Link to="/" class="navbar-brand" > Pet Store </Link>
             <Link to="/catalog" class="btn btn-secondary space-right2"> Catalog </Link>
-            <Link to="/admin" class="btn btn-secondary"> Login </Link>
+            <Link to="/admin/login" class="btn btn-dark"> Admin </Link>
           </div>
           <ul class="navbar-nav">
             <li class="nav-item">
