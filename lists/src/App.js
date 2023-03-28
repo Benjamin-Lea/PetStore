@@ -2,14 +2,15 @@
 import * as React from "react";
 import { Routes, Route, Outlet, Link } from "react-router-dom";
 import { Offcanvas, Button } from "react-bootstrap";
+import { CartProvider } from "./Cart/CartContext.js";
+import { useCart } from "./Cart/CartContext.js";
 import Home from './home/Home.js';
 import Catalog from './Catalog/Catalog.js';
 import AdminLogin from './admin/AdminLogin.js';
 import AdminPets from './admin/AdminPets.js';
 import AdminMerchandise from './admin/AdminMerchandise.js';
 import FAQ from './FAQ/FAQ.js';
-import { CartProvider } from "./Cart/CartContext.js";
-import { useCart } from "./Cart/CartContext.js";
+import PetDetails from './DetailedPage/PetDetails.js';
 
 export default function App() {
 
@@ -24,6 +25,7 @@ export default function App() {
             <Route path="/admin/pets" element={<AdminPets />} />
             <Route path="/admin/merchandise" element={<AdminMerchandise />} />
             <Route path="/faq" element={<FAQ />} />
+            <Route path="/petDetails/:id" element={<PetDetails />} />
           </Route>
         </Routes>
       </div>

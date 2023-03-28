@@ -43,7 +43,6 @@ app.use("/", (req, res, next) => {
         }
       })
     } else {
-      console.log("Path does not require authentication");
       next();
     }
   } catch (e) {
@@ -183,7 +182,6 @@ app.use('/suppliesData', async (req, res) => {
 // ######### Get Catalog Data ######### //
 app.use('/catalogData', async (req, res) => {
   try {
-    console.log("In /catalogData");
     // Get the animals
     var animals = await database.collection('animals').find({}).toArray();
     // get the supplies
@@ -336,7 +334,8 @@ async function deleteSupplies(suppliesItem) {
   }
 }
 
-app.use('*', function (req, res) {
+
+app.use('/*', function (req, res) {
   res.sendFile(path.join(__dirname, '..', 'lists', 'build', 'index.html'));
 });
 
