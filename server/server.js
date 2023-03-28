@@ -15,8 +15,8 @@ mongoose.connect(uri);
 
 var Animal = require('./animal.js');
 var Species = require('./species.js');
-var Supply = require('./supplies.js');
 const supplies = require('./supplies.js');
+const faq = require('./faq.js');
 
 app.use(express.static(path.join(__dirname, '..', 'lists', 'build')));
 
@@ -30,7 +30,7 @@ app.use("/", (req, res, next) => {
     if (req.path == "/authorized") {
       jwt.verify(req.headers.token, '__PetStoreKey__', function (err, decoded) {
         if (decoded.User == "admin") {
-          res.json({ 
+          res.json({
             message: 'User authorized!',
             status: true
           });
@@ -210,6 +210,45 @@ app.use('/catalogData', async (req, res) => {
   }
   // send the data
   res.json(data);
+});
+
+// ######### Get FAQ Data ######### //
+app.use('/faqData', async (req, res) => {
+  try {
+    var faq = await database.collection('faqs').find({}).toArray();
+    var data = []; // array of objects
+    for (let index = 0; index < faq.length; index++) { // Clean and organize our catalog data
+      if (faq[index].answer === "") {
+        faq[index].answer = "No answer provided";
+      }
+      data[index] = {
+        id: faq[index]._id,
+        question: faq[index].question,
+        answer: faq[index].answer,
+      }
+    };
+  } catch (err) {
+    console.log("Error occurred loading FAQ data");
+  }
+  // send the data
+  res.json(data);
+});
+
+// ######### Add Question ######### //
+app.use('/addQuestion', async (req, res) => {
+  const { question } = req.body;
+  try {
+    var Pip = new faq({ question: question, answer: "" });
+    await Pip.save();
+  } catch (err) {
+    if (err.code === 11000) {
+      console.log("Duplicate entry");
+    }
+    else {
+      console.log("Unknown error");
+      console.log(err);
+    }
+  }
 });
 
 // ######### Add Specieses ######### //

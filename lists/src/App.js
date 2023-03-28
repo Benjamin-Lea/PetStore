@@ -2,13 +2,14 @@
 import * as React from "react";
 import { Routes, Route, Outlet, Link } from "react-router-dom";
 import { Offcanvas, Button } from "react-bootstrap";
-import AdminPets from './admin/AdminPets.js';
 import Home from './home/Home.js';
 import Catalog from './Catalog/Catalog.js';
+import AdminLogin from './admin/AdminLogin.js';
+import AdminPets from './admin/AdminPets.js';
 import AdminMerchandise from './admin/AdminMerchandise.js';
+import FAQ from './FAQ/FAQ.js';
 import { CartProvider } from "./Cart/CartContext.js";
 import { useCart } from "./Cart/CartContext.js";
-import AdminLogin from './admin/AdminLogin.js';
 
 export default function App() {
 
@@ -22,6 +23,7 @@ export default function App() {
             <Route path="/admin/Login" element={<AdminLogin />} />
             <Route path="/admin/pets" element={<AdminPets />} />
             <Route path="/admin/merchandise" element={<AdminMerchandise />} />
+            <Route path="/faq" element={<FAQ />} />
           </Route>
         </Routes>
       </div>
@@ -36,9 +38,10 @@ function Layout() {
       <nav class="navbar navbar-expand navbar-dark bg-dark sticky-top">
         <div class="container-fluid">
           <div>
-            <Link to="/" class="navbar-brand" > Pet Store </Link>
-            <Link to="/catalog" class="btn btn-secondary space-right2"> Catalog </Link>
-            <Link to="/admin/login" class="btn btn-dark"> Admin </Link>
+            <Link to="/" class="navbar-brand buttSpace" > Pet Store </Link>
+            <Link to="/catalog" class="btn btn-secondary buttSpace"> Catalog </Link>
+            <Link to="/faq" class="btn btn-secondary buttSpace"> FAQ </Link>
+            <Link to="/admin/login" class="btn btn-dark buttSpace"> Admin </Link>
           </div>
           <ul class="navbar-nav">
             <li class="nav-item">

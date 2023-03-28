@@ -121,3 +121,47 @@ body {
   font-family:lucida, sans-serif;
   line-height:1;
 }
+
+.buttSpace {
+  margin-right: 20px;
+}
+
+.checkoutForm label{
+  display: block;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.FAQ {
+  padding-left: 50px;
+}
+
+.FAQ h1 {
+  margin: 0;
+  padding: 0;
+  font-size: 1.5em;
+  font-weight: bold;
+  text-align: left;
+}
+
+.FAQ h2 {
+  margin: 0;
+  padding: 0;
+  font-size: 1.2em;
+  font-weight: bold;
+  text-align: left;
+}
+
+.FAQ p {
+  margin-left: 20px;
+  margin-bottom: 20px;
+  padding: 0;
+  font-size: 1.2em;
+  text-align: left;
+  
+}
+.FAQ input {
+  width: 400px;
+}

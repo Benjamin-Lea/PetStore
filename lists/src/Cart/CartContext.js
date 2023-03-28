@@ -61,8 +61,13 @@ export function CartProvider({ children }) {
         return cart.find((item) => item.id === id)?.quantity || 0;
     }
 
+    function checkout() {
+        setCart([]);   
+        alert("Thank you for your purchase! \n Your order will be shipped to you shortly.");
+    }
+
     return (
-        <CartContext.Provider value={{increaseCartQuantity, decreaseCartQuantity, removeFromCart, getQuantity, openCart, closeCart, cartQuantity, cart}}>
+        <CartContext.Provider value={{increaseCartQuantity, decreaseCartQuantity, removeFromCart, getQuantity, openCart, closeCart, checkout, cartQuantity, cart}}>
             {children}
             <Cart isOpen={isOpen} />
         </CartContext.Provider>
