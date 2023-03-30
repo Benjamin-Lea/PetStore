@@ -20,11 +20,6 @@ class Home extends Component {
 
   // Get the data from the server
   componentDidMount() {
-    fetch('/animalData')
-      .then(response => response.json())
-      .then(listsData => {
-        this.setState({ lists: listsData.lists, pets: listsData.pets });
-      })
     fetch('/catalogData')
       .then(response => response.json())
       .then(responseData => {
@@ -33,17 +28,21 @@ class Home extends Component {
   }
 
   renderSlides() {
-    console.log(this.state.pets)
     if (this.state.lists != null) {
-      return this.state.lists.map((list) => {
-        return this.state.pets[list].animalNames.map((pet, index) => {
-          console.log(this.state.pets[list])
+      return this.state.data.map((item) => {
+        if (item.species != "-") {
           return (
-            <div key={index}>
-              <SLideShowItem list={list} name={pet} imageURLs={this.state.pets[list].animalImageURLs[index]} />
+            <div key={item.id}>
+              <SLideShowItem list={item.species} name={item.name} imageURLs={item.imageURL} id={item} />
             </div>
           );
-        });
+        } else {
+          return (
+          <div key={item.id}>
+            <SLideShowItem list="" name={item.name} imageURLs={item.imageURL} id={item} />
+          </div>
+          );
+        }
       });
     }
   }
@@ -60,7 +59,7 @@ class Home extends Component {
     if (item.species != "-") {
       return (
         <div>
-          <span class="dropdown-catagory">{item.species}</span> 
+          <span class="dropdown-catagory">{item.species}</span>
           <span class="dropdown-name">{item.name}</span>
           <span class="dropdown-details">{item.breed}</span>
         </div>
