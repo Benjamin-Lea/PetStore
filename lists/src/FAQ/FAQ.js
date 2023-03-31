@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import '../app.css'
+import { Accordion } from 'react-bootstrap-accordion'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-bootstrap-accordion/dist/index.css'
+
 
 class FAQ extends Component {
     constructor() {
@@ -45,20 +48,23 @@ class FAQ extends Component {
                 <h1>FAQ</h1>
                 <div className='FAQ-questions'>
                     {this.state.data.map(item => (
-                        <div className='FAQ-question'>
-                            <h2>Q: {item.question}</h2>
-                            <p>A: {item.answer}</p>
-                        </div>
+                        <Accordion title={
+                            <div className='FAQ-question' style={{color : item.answer === "No answer provided" ? 'red' : 'black'}}>
+                               {item.question}
+                            </div>
+                        } >
+                            <div className='FAQ-answer'>
+                                {item.answer}
+                            </div>
+                        </Accordion>
                     ))}
                 </div>
                 <br />
                 <div className='FAQ-form'>
                     <h1>Have a question that isn't answered here?</h1>
-                    <p>Fill out the form below and we'll get back to you as soon as possible!</p>
                     <form className='form-group row g-3' onSubmit={this.handleSubmit.bind(this)}>
                         <div className='col'>
-                            <label for="name">Question</label>
-                            <input type="text" className="form-control" id="question" placeholder="Enter your question" value={this.state.question} onChange={this.handleChange.bind(this)}/>
+                            <input type="text" className="form-control" id="question" placeholder="Enter your question" value={this.state.question} onChange={this.handleChange.bind(this)} />
                         </div>
                     </form>
                 </div>
