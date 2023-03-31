@@ -302,9 +302,19 @@ app.use('/addSuplies', async (req, res) => {
 });
 
 // ######### Delete Pet Item ######### //
-app.delete('/api/pets/:name', (req, res) => {
-  const name = req.params.name;
-  deleteAnimal(name);
+app.delete('/api/pet/:name', async (req, res) => {
+  let name = req.params.name;
+  console.log("delete supplies");
+  console.log(name);
+  try {
+    let database = client.db(dbName);
+    let result = await database.collection('animals').deleteOne({ name: name });
+    console.log(`${result.deletedCount} document(s) deleted.`);
+    res.status(200).send(`Successfully deleted ${result.deletedCount} document(s).`);
+  } catch (err) {
+    console.log("Error occurred while deleting animal", err);
+    res.status(500).send("Error occurred while deleting animal.");
+  }
 });
 
 // ######### Delete Supplies Item ######### //

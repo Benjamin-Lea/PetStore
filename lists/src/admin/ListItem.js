@@ -20,13 +20,13 @@ class ListItem extends Component {
   }
 
   handleRemove(name) {
-    window.location.reload();
     fetch(`/api/pet/${name}`, {
       method: 'DELETE'
     })
     .then(response => {
       if (response.status === 200) {
         console.log('Item removed successfully');
+        window.location.reload();
       } else {
         console.log('Failed to remove item');
       }
