@@ -6,13 +6,19 @@ import { useCart } from "../Cart/CartContext";
 export function StoreItem(props) {
     const { increaseCartQuantity, decreaseCartQuantity, removeFromCart, getQuantity } = useCart();
     const quantity = getQuantity(props.id);
+
+    const gotoItemPage = (item) => {
+        window.location.href = '/petDetails/' + item.id;
+    }
+
     return (
         <Card>
             <Card.Img
                 variant="top"
                 src={props.imageURL}
                 height="200px"
-                style={{ objectFit: "cover" }}
+                style={{ objectFit: "cover", cursor: 'pointer'}}
+                onClick={() => gotoItemPage(props)}
             />
             <Card.Body className="d-flex flex-column">
                 <Card.Title className="d-flex justify-content-between align-items-baseline mb-4" >
@@ -22,7 +28,7 @@ export function StoreItem(props) {
                 <div className="mt-auto">
                     {/* Add to cart button section */}
                     {(quantity === 0) ? (
-                        <Button className="w-100" onClick={() => increaseCartQuantity(props.id)}>
+                        <Button className="w-100" onClick={() => this.increaseCartQuantity(props.id)}>
                             + Add To Cart
                         </Button>
                     ) : (
