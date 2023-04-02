@@ -29,7 +29,8 @@ export function ItemInfo(props) {
   };
 
   return (
-    <Card style={{ textAlign: "center" }}>
+    <div style={{ display: "flex", alignItems: "center", justifyContent: "center",}}>
+    <Card className="bg-transparent" style={{display: "inline-block", textAlign: "center" }}>
       <Card.Header as="h1">{props.name}</Card.Header>
       <Card.Img
         variant="top"
@@ -41,6 +42,21 @@ export function ItemInfo(props) {
         <Card.Text style={{ marginBottom: "1rem" }}>
           {"Item Description Here... More info needed... test 123"}
         </Card.Text>
+        {props.type === "animal" && (
+        <Card.Text style={{ marginBottom: "1rem" }}>
+          Breed: {props.breed}
+        </Card.Text>
+        )}
+        {props.type === "animal" && (
+        <Card.Text style={{ marginBottom: "1rem" }}>
+          Age: {props.age}
+        </Card.Text>
+        )}
+        {props.type === "animal" && (
+        <Card.Text style={{ marginBottom: "1rem" }}>
+          Gender: {props.gender}
+        </Card.Text>
+        )}
         <Card.Text style={{ fontWeight: "bold" }}>
           Price: {props.price}
         </Card.Text>
@@ -81,5 +97,6 @@ export function ItemInfo(props) {
         )}
       </Card.Body>
     </Card>
+    </div>
   );
 }
