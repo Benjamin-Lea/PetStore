@@ -4,7 +4,6 @@ import { Button, Stack } from 'react-bootstrap';
 export function CartItem(props) {
     const { id, quantity } = props.item;
     const { removeFromCart } = useCart();
-    console.log("Store items", props.storeItems);
     const item = props.storeItems.find((item) => item.id === id);
 
     if (item == null) return null;

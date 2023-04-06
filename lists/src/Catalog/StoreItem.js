@@ -28,7 +28,7 @@ export function StoreItem(props) {
                 <div className="mt-auto">
                     {/* Add to cart button section */}
                     {(quantity === 0) ? (
-                        <Button className="w-100" onClick={() => this.increaseCartQuantity(props.id)}>
+                        <Button className="w-100" onClick={() => increaseCartQuantity(props.id)}>
                             + Add To Cart
                         </Button>
                     ) : (

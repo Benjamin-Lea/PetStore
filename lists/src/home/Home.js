@@ -155,22 +155,22 @@ class Home extends Component {
         </div>
         <br></br>
         <div className="ContactUs">
-          <h1>End of the Line Pet Shop</h1>
+          <h1>Pet Shop</h1>
           <div className="FAQ-form">
-            <h1>Get in contact with us.</h1>
+            <h1>Contact Us</h1>
             <form className='form-group row g-3' onSubmit={this.handleSubmit.bind(this)}>
               <div className='col'>
                 <input type="email" className="form-control" id="email" required="true" placeholder="
-                        Enter your email" value={this.state.email} onChange={this.emailChange.bind(this)} />
+                        E@mail" value={this.state.email} onChange={this.emailChange.bind(this)} />
                 <input type="text" className="form-control" id="qualm" required="true" placeholder="
-                        What's your qualm?" value={this.state.qualm} onChange={this.qualmChange.bind(this)} />
+                        qualm?" value={this.state.qualm} onChange={this.qualmChange.bind(this)} />
                 <Button type="submit" className="btn btn-primary" >Submit</Button>
               </div>
             </form>
           </div>
           <div className="Links">
-            <Link to="/catalog" class="btn btn-success btn-lg" style={{ margin: "auto", marginTop: "35px" }}>See Catalog</Link>
-            <Link to="/FAQ" class="btn btn-success btn-lg" style={{ margin: "auto", marginTop: "35px" }}>See FAQ</Link>
+            <Link to="/catalog" class="btn btn-success btn-lg" style={{ margin: "auto", marginTop: "35px" }}>Catalog</Link>
+            <Link to="/FAQ" class="btn btn-success btn-lg" style={{ margin: "auto", marginTop: "35px" }}>FAQ</Link>
           </div>
         </div>
       </div>

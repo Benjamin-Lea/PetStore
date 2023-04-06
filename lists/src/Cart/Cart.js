@@ -15,7 +15,6 @@ export function Cart({ isOpen }) {
         fetch('/catalogData')
             .then(response => response.json())
             .then(data => setStoreItems(data))
-        console.log("Store items in useEffect", storeItems);
     }, [storeString]);
 
     return (
