@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { InputGroup, Form, Dropdown } from 'react-bootstrap';
+import { InputGroup, Form, Dropdown, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
+import "../app.css";
 import SLideShowItem from "./SlideShowItem.js";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -15,6 +16,8 @@ class Home extends Component {
       filterText: "",
       data: [],
       showDropdown: false, // new state for showing/hiding the dropdown
+      email: "",
+      qualm: ""
     };
   }
 
@@ -38,9 +41,9 @@ class Home extends Component {
           );
         } else {
           return (
-          <div key={item.id}>
-            <SLideShowItem list="" name={item.name} imageURLs={item.imageURL} id={item} />
-          </div>
+            <div key={item.id}>
+              <SLideShowItem list="" name={item.name} imageURLs={item.imageURL} id={item} />
+            </div>
           );
         }
       });
@@ -100,6 +103,19 @@ class Home extends Component {
     this.setState({ filterText: event.target.value });
   }
 
+  emailChange(e) {
+    this.setState({ email: e.target.value });
+  }
+
+  qualmChange(e) {
+    this.setState({ qualm: e.target.value });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    this.setState({ email: "", qualm: "" });
+    alert("Thank you for your feedback!");
+  }
 
   render() {
     const settings = {
@@ -136,6 +152,26 @@ class Home extends Component {
         </Slider>
         <div align="center">
           <Link to="/catalog" class="btn btn-success btn-lg" style={{ margin: "auto", marginTop: "35px" }}>See Catalog</Link>
+        </div>
+        <br></br>
+        <div className="ContactUs">
+          <h1>End of the Line Pet Shop</h1>
+          <div className="FAQ-form">
+            <h1>Get in contact with us.</h1>
+            <form className='form-group row g-3' onSubmit={this.handleSubmit.bind(this)}>
+              <div className='col'>
+                <input type="email" className="form-control" id="email" required="true" placeholder="
+                        Enter your email" value={this.state.email} onChange={this.emailChange.bind(this)} />
+                <input type="text" className="form-control" id="qualm" required="true" placeholder="
+                        What's your qualm?" value={this.state.qualm} onChange={this.qualmChange.bind(this)} />
+                <Button type="submit" className="btn btn-primary" >Submit</Button>
+              </div>
+            </form>
+          </div>
+          <div className="Links">
+            <Link to="/catalog" class="btn btn-success btn-lg" style={{ margin: "auto", marginTop: "35px" }}>See Catalog</Link>
+            <Link to="/FAQ" class="btn btn-success btn-lg" style={{ margin: "auto", marginTop: "35px" }}>See FAQ</Link>
+          </div>
         </div>
       </div>
     )
