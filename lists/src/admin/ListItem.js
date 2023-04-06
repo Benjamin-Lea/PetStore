@@ -42,6 +42,7 @@ class ListItem extends Component {
     let gender = this.props.gender;
     let imageURLs = this.props.imageURLs;
     let price = this.props.price;
+    let description = this.props.description;
     const imageStyle = {
       maxWidth: "75%",
       maxHeight: "75%",
@@ -56,6 +57,7 @@ class ListItem extends Component {
           <div class="card-body">
             <h5 id="card-text">Pet Name: {name}</h5>
             <p id="card-text">Age: {age}</p>
+            <p id="card-text">Description: {description}</p>
             <p id="card-text">Breed: {breed}</p>
             <p id="card-text">Gender: {gender}</p>
             <p id="card-text">Price: {price}</p>

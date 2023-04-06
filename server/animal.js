@@ -12,7 +12,8 @@ var animalSchema = new mongoose.Schema({
     gender: { type: String, enum: ['male', 'female'] },
     traits: [String],
     age: Number,
-    imageURL: String
+    imageURL: String,
+    description: {type: String, default: "No description provided."}
   });
 
   module.exports = mongoose.model('Animal', animalSchema);

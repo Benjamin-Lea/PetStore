@@ -36,7 +36,8 @@ class AddPet extends Component {
           breed: this.state.breed,
           age: this.state.age,
           gender: this.state.gender,
-          price: this.state.price
+          price: this.state.price,
+          description : this.state.description
         }
       )
     });
@@ -59,6 +60,7 @@ class AddPet extends Component {
             <input type="text" className="form-control form-control-sm" placeholder="Pet Name" ref="petName" value={this.state.petName} onChange={(e) => this.handleChange(e, "petName")} />
             <input type="text" className="form-control form-control-sm" placeholder="Image URL" ref="imageURL" value={this.state.imageURL} onChange={(e) => this.handleChange(e, "imageURL")} />
             <input type="text" className="form-control form-control-sm" placeholder="Breed" ref="breed" value={this.state.breed} onChange={(e) => this.handleChange(e, "breed")} />
+            <input type="text" className="form-control form-control-sm" placeholder="Description" ref="description" value={this.state.description} onChange={(e) => this.handleChange(e, "description")} />
             <input type="number" className="form-control form-control-sm" placeholder="Age" ref="age" value={this.state.age} onChange={(e) => this.handleChange(e, "age")} />
             <input type="number" className="form-control form-control-sm" placeholder="Price" ref="price" value={this.state.price} onChange={(e) => this.handleChange(e, "price")} />
             <p> </p>

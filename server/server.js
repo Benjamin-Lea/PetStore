@@ -128,12 +128,14 @@ app.use('/animalData', async (req, res) => {
       let genders = await database.collection('animals').find({ species: species[index].name }, { projection: { _id: 0, gender: 1 } }).toArray();
       let imageURLs = await database.collection('animals').find({ species: species[index].name }, { projection: { _id: 0, imageURL: 1 } }).toArray();
       let prices = await database.collection('animals').find({ species: species[index].name }, { projection: { _id: 0, price: 1 } }).toArray();
+      let descriptions = await database.collection('animals').find({ species: species[index].name }, { projection: { _id: 0, description: 1 } }).toArray();
       let animalAges = Array(animals.length);
       let animalNames = Array(animals.length);
       let animalBreeds = Array(animals.length);
       let animalGenders = Array(animals.length);
       let animalImageURLs = Array(animals.length);
       let animalPrices = Array(animals.length);
+      let animalDescriptions = Array(animals.length);
       for (let i = 0; i < animals.length; i++) {
         animalNames[i] = animals[i].name;
         animalBreeds[i] = breeds[i].breed;
@@ -141,6 +143,7 @@ app.use('/animalData', async (req, res) => {
         animalGenders[i] = genders[i].gender;
         animalImageURLs[i] = imageURLs[i].imageURL;
         animalPrices[i] = prices[i].price;
+        animalDescriptions[i] = descriptions[i].description;
       }
       // set the items for the list
       data.pets[species[index].name] = {
@@ -149,7 +152,8 @@ app.use('/animalData', async (req, res) => {
         animalAges,
         animalGenders,
         animalImageURLs,
-        animalPrices
+        animalPrices,
+        animalDescriptions
       };
     }
   } catch (err) {
@@ -201,6 +205,7 @@ app.use('/catalogData', async (req, res) => {
         breed: combo[index].breed ? combo[index].breed : '-',
         age: combo[index].age ? combo[index].age : '-',
         gender: combo[index].gender ? combo[index].gender : '-',
+        description: combo[index].description ? combo[index].description : '-',
       };
     }
   } catch (err) {
@@ -269,9 +274,9 @@ app.use('/addList', async (req, res) => {
 
 // ######### Add Pet Item ######### //
 app.use('/addPet', async (req, res) => {
-  const { listName, itemName, petName, imageURL, breed, age, gender, price } = req.body;
+  const { listName, itemName, petName, imageURL, breed, age, gender, price, description } = req.body;
   try {
-    var Pip = new Animal({ name: itemName, species: listName, name: petName, breed: breed, imageURL: imageURL, age: age, gender: gender, price: price });
+    var Pip = new Animal({ name: itemName, species: listName, name: petName, breed: breed, imageURL: imageURL, age: age, gender: gender, price: price, description: description });
     await Pip.save();
   } catch (err) {
     if (err.code === 11000) {
