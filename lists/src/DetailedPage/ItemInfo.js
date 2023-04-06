@@ -30,7 +30,7 @@ export function ItemInfo(props) {
 
   return (
     <div style={{ display: "flex", alignItems: "center", justifyContent: "center",}}>
-    <Card className="bg-transparent" style={{display: "inline-block", textAlign: "center", maxWidth: "500px"}}>
+    <Card className="bg-transparent" style={{display: "inline-block", textAlign: "center", maxWidth: "1000px"}}>
       <Card.Header as="h1">{props.name}</Card.Header>
       <Card.Img
         variant="top"
@@ -39,9 +39,13 @@ export function ItemInfo(props) {
         style={{ maxWidth: "400px", margin: "auto" }}
       />
       <Card.Body>
+      <hr></hr>
+      {props.type === "animal" && (
         <Card.Text style={{ marginBottom: "1rem" }}>
-          Description: {props.description}
+          {props.description}
         </Card.Text>
+        )}
+      <hr></hr>
         {props.type === "animal" && (
         <Card.Text style={{ marginBottom: "1rem" }}>
           Breed: {props.breed}
