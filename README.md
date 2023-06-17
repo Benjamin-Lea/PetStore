@@ -1,4 +1,14 @@
-# PetStore Web App - SENG 4640 Final Project
+# Pet Store Web App
+
+This repository contains the code for a modern pet store website, developed as part of the Software Engineering for Web Applications course (SENG-4640) in Winter 2023. The goal of the project was to create a full-stack e-commerce web application that allows users to browse and purchase a variety of pet products. It includes common e-commerce functionalities such as a cart, checkout, customer reviews, and product search and filtering. 
+
+Developed using MERN stack
+ - MongoDB
+ - Express
+ - React
+ - Node.js
+
+The team worked collaboratively, holding regular meetings to discuss progress, set goals, and manage the project.
 
 ## Team Members
 - Ben Lea 
@@ -7,23 +17,6 @@
 ## Website Demo
 
 <img src="images\Petstore_Example.gif">
-
-## Project Information
-
-This project was created using the following technologies:
-- Node.js
-- Express.js
-- React.js
-- MongoDB Atlas
-- Mongoose
-- Bootstrap
-- HTML
-- CSS
-- JavaScript
-
-This project serves as a demonstration of the skills learned through the 4 month SENG 4640 course at Thompson Rivers University. The project is a simple pet store application that allows users to view, add, edit, and delete pets from a database. The application is built using the MERN stack and is deployed on a local server. The application is built using the MVC design pattern and is split into two main components: the client and the server. The client is built using React.js and is responsible for the front-end of the application. The server is built using Node.js and Express.js and is responsible for the back-end of the application. The server is connected to a MongoDB database using Mongoose. The application is styled using Bootstrap and custom CSS. The application is deployed on a local server and is accessible through a web browser. 
-
-The grade I received for this program was A+
 
 ## How to run the application
 Tested on SENG-Lab 1791 Workstation 19 using PowerShell.
