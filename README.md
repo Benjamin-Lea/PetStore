@@ -1,11 +1,14 @@
-# PetStore SENG 4640 Final Project
-Alex & Ben
+# PetStore Web App - SENG 4640 Final Project
 
-## Example
+## Team Members
+- Ben Lea 
+- Alex Bepple
+
+## Website Demo
 
 <img src="images\Petstore_Example.gif">
 
-## INFO
+## Project Information
 
 This project was created using the following technologies:
 - Node.js
