@@ -2,15 +2,16 @@
 
 This repository contains the code for a modern pet store website, developed as part of the Software Engineering for Web Applications course (SENG-4640) in Winter 2023. The goal of the project was to create a full-stack e-commerce web application that allows users to browse and purchase a variety of pet products. It includes common e-commerce functionalities such as a cart, checkout, customer reviews, and product search and filtering. 
 
-## Team Members
-- Ben Lea 
-- Alex Bepple
-
 Developed using MERN stack
  - MongoDB
  - Express
  - React
  - Node.js
+
+## Team Members
+- Ben Lea 
+- Alex Bepple
+
 
 The team worked collaboratively, holding regular meetings to discuss progress, set goals, and manage the project.
 
