@@ -15,7 +15,7 @@ Developed using MERN stack
 
 The team worked collaboratively, holding regular meetings to discuss progress, set goals, and manage the project.
 
-## Website Demo
+## Screenshot Gif
 
 <img src="images\Petstore_Example.gif">
 
